@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+
+   <div  class="center">
+       <div class="card" style="width: 18rem;">
+           <div class="card-body">
+               <h5 class="card-title text danger">HATA</h5>
+               <p class="card-text">Sistemde bir hata meydana geldi.</p>
+               @if (User.Identity.IsAuthenticated)
+               {
+                   @Html.ActionLink("Anasayfa", "Index", "Admin/Personel", null, new { @class = "btn btn-primary" })
+                   
+               }
+               else
+               {
+                   @Html.ActionLink("Anasayfa", "Index", "Home", null, new { @class = "btn btn-primary" })
+               }
+
+           </div>
+       </div>
+   </div>
+    
+    
+</body>
+</html>

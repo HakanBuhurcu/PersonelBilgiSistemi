@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PersonelSistemi.Models.Personeller>
+
+@{
+    ViewBag.Title = "Personeller";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Personel Listesi</h2>
+<br>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th></th>
+            <th>@Html.DisplayNameFor(model => model.Ad)</th>
+            <th>@Html.DisplayNameFor(model => model.Soyad)</th>
+            <th>@Html.DisplayNameFor(model => model.Telefon)</th>
+            <th>Detayları</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var personel in Model)
+        {
+        <tr>
+            <th></th>
+            <td>@Html.DisplayFor(modelPersonel => personel.Ad)</td>
+            <td>@Html.DisplayFor(modelPersonel => personel.Soyad)</td>
+            <td>@Html.DisplayFor(modelPersonel => personel.Telefon)</td>
+            <td>
+                @Html.ActionLink("Detay", "Detay", new { id = personel.PersonelID }, new { @class = "btn btn-info" })
+            </td>
+
+        </tr>
+        }
+
+    </tbody>
+</table>

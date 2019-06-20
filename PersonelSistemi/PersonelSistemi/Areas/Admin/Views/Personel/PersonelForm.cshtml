@@ -1,0 +1,77 @@
+﻿@model PersonelSistemi.ViewModels.PersonelFormViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Personel Formu";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div id="Mesaj" style="display: none;"></div>
+<h2>Personel Formu</h2>
+@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Mesaj", OnSuccess = "ResetForm(data)" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card">
+        <div class="card-body">
+            @Html.HiddenFor(model => model.personel.PersonelID)
+            <div class="form-group">
+                @Html.LabelFor(model => model.personel.Ad, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.personel.Ad, new { htmlAttributes = new { @class = "form-control", @placeholder = "Adını Giriniz", maxlength = 50 } })
+                    @Html.ValidationMessageFor(model => model.personel.Ad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.personel.Soyad, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.personel.Soyad, new { htmlAttributes = new { @class = "form-control", @placeholder = "Soyadını Giriniz", maxlength = 50 } })
+                    @Html.ValidationMessageFor(model => model.personel.Soyad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.personel.Telefon, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.personel.Telefon, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefon numarası giriniz.", maxlength = 50 } })
+                    @Html.ValidationMessageFor(model => model.personel.Telefon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.personel.DepartmanID, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.personel.DepartmanID, new SelectList(Model.departmanlar, "DepID", "DepAd"), "Departman seçiniz", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.personel.DepartmanID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.personel.YoneticiID, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.personel.YoneticiID, Model.yoneticiler, "Yönetici seçebilirsiniz.", new { @class = "form-control" ,id="yoneticilerselect" })
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" id="kaydet" value="Kaydet" class="btn btn-success" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+}
+

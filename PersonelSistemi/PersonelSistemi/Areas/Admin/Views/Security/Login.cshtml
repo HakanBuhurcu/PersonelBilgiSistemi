@@ -1,0 +1,62 @@
+﻿@model PersonelSistemi.Models.Kullanicilar
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/login.css" rel="stylesheet" />
+
+
+
+</head>
+<body>
+
+
+    <div class="container login-container">
+        <div class="row">
+            <div id="Mesaj" style="display: none;"></div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6 login-form-1">
+                <h3>Yönetici Girişi</h3>
+
+                @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Mesaj", OnSuccess = "SuccessPost" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.KullaniciAd, new { @class = "form-control", placeholder = "Kullanıcı Adı *", maxlength = 50 })
+                        @Html.ValidationMessageFor(m => m.KullaniciAd, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.Parola, new { @class = "form-control", placeholder = "Parola *", maxlength = 50 })
+                        @Html.ValidationMessageFor(m => m.Parola, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btnSubmit" id="Giris" value="Giriş" />
+                    </div>
+                    <a href="/Home">Misafir olarak devam edin.</a>
+                }
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<PersonelSistemi.Models.Personeller>
+@{
+    ViewBag.Title = "Personeller";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@section stylesheets{
+    <link href="~/Content/sweetalert2.min.css" rel="stylesheet" />
+}
+
+<p>@Html.ActionLink("Yeni Personel Ekle", "Ekle", null, new { @class = "btn btn-secondary" })</p>
+<h2>Personel Listesi</h2>
+<br>
+
+@Html.AntiForgeryToken()
+
+<table class="table table-bordered" id="tblPersoneller">
+    <thead>
+        <tr>
+            <th></th>
+            <th>@Html.DisplayNameFor(model => model.Ad)</th>
+            <th>@Html.DisplayNameFor(model => model.Soyad)</th>
+            <th>@Html.DisplayNameFor(model => model.Telefon)</th>
+            <th>Detayları</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var personel in Model)
+        {
+            <tr>
+                <th></th>
+                <td>@Html.DisplayFor(modelPersonel => personel.Ad)</td>
+                <td>@Html.DisplayFor(modelPersonel => personel.Soyad)</td>
+                <td>@Html.DisplayFor(modelPersonel => personel.Telefon)</td>
+                <td>
+                    @Html.ActionLink("Detay", "Detay", new { id = personel.PersonelID }, new { @class = "btn btn-info" })
+                </td>
+                <td>
+                    @Html.ActionLink("Güncelle", "Guncelle", new { id = personel.PersonelID }, new { @class = "btn btn-warning" })
+                </td>
+                <td>
+                    <a class="btn btn-danger btnPersonelSil" data-id="@personel.PersonelID">Sil</a>
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@section scripts{
+
+    <script src="~/Scripts/sweetalert2.min.js"></script>
+
+}

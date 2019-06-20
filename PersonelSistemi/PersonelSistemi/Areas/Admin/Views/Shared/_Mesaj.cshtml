@@ -1,0 +1,13 @@
+﻿@model PersonelSistemi.ViewModels.MesajViewModel
+    @if (Model.isSuccess)
+    {
+        <div class="alert alert-success" role="alert">
+            @Model.Mesaj <a href="@Model.Url">@Model.linkText</a>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.Mesaj <a href="@Model.Url">@Model.linkText</a>
+        </div>
+    }

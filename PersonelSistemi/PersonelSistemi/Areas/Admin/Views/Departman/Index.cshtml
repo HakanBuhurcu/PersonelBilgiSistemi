@@ -1,0 +1,51 @@
+﻿@model  IEnumerable<PersonelSistemi.Models.Departmanlar>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section stylesheets{
+    <link href="~/Content/sweetalert2.min.css" rel="stylesheet" />
+}
+
+<p>@Html.ActionLink("Yeni Departman Ekle", "Ekle", null, new { @class = "btn btn-secondary" })</p>
+<h2>Departman Listesi</h2>
+<br>
+@Html.AntiForgeryToken()
+
+<table class="table table-bordered" id="tblDepartmanlar">
+    <thead>
+        <tr>
+
+            <th></th>
+            <th>@Html.DisplayNameFor(model => model.DepAd)</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var departman in Model)
+        {
+            <tr>
+                <th></th>
+                <td>@departman.DepAd</td>
+                <td>
+                    @Html.ActionLink("Güncelle", "Guncelle", new { id = departman.DepID }, new { @class = "btn btn-warning" })
+                </td>
+                <td>
+                    <a class="btn btn-danger btnDepartmanSil"  data-id="@departman.DepID">Sil</a>
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@section scripts{
+
+    <script src="~/Scripts/sweetalert2.min.js"></script>
+
+}
